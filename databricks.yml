@@ -1,0 +1,22 @@
+bundle:
+  name: medallion_pipeline
+
+resources:
+  jobs:
+    medallion_job:
+      name: medallion_pipeline_dev
+      tasks:
+        - task_key: bronze_silver_gold
+          notebook_task:
+            notebook_path: ./01_bronze_ingestion_incremental_scd2_fixed.ipynb
+          environment_key: default
+
+      environments:
+        - environment_key: default
+          spec:
+             environment_version: "2"
+
+targets:
+  dev:
+    mode: development
+    default: true
